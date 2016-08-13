@@ -7,8 +7,9 @@ USERPW = ''
 def getCPU_Temperature():
     if os.name != 'nt':
         temp = subprocess.check_output('vcgencmd measure_temp', shell=True)
-        temp = temp.split('=')
-        return temp[1]
+        temp = str(temp).split('=')[1]
+        temp = temp.replace('\\n"', '')
+        return temp
     return "0'C"
 
 app = Flask(__name__)
