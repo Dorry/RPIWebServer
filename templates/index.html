@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="jumbotron" style="margin:0px 20px; border-radius:10px">
+    <div class="container">
+        <h1>Hello, Raspberry PI Web Server!</h1>
+        <p>Current CPU Temperature is <span class="label label-info">{{ cpu_temp }}</span></p>
+    </div>
+</div>
+{% endblock %}
