@@ -22,6 +22,11 @@
                 {% if not session.login_ok %}
                 <a href="/login" class="btn btn-default">로그인</a>
                 {% else %}
+                {% if isoff %}
+                <a href="/camon" class="btn btn-default">카메라켜기</a>
+                {% else %}
+                <a href="/camoff" class="btn btn-default">카메라끄기</a>
+                {% endif %}
                 <a href="/restart" class="btn btn-danger">서버 재실행</a>
                 <a href="/logout" class="btn btn-default">로그아웃</a>
                 {% endif %}
