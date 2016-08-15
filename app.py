@@ -64,6 +64,7 @@ def camoff():
     context = {'isoff': False,
                'msg': "카메라가 종료되지 않았습니다"}
     if result:
+        res_list = [int(pid.replace('\\n', '')) for pid in res_list]
         kill_res = subprocess.call("sudo kill -9 %s" % " ".join(res_list))
         if not kill_res and not isCameraOn():
             context['isoff'] = True
