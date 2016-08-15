@@ -24,7 +24,7 @@ app = Flask(__name__)
 def index():
     context = {'cpu_temp': getCPU_Temperature(),
                'isoff': not isCameraOn()}
-    return render_template('index.html', context)
+    return render_template('index.html', **context)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -43,25 +43,25 @@ def logout():
 
 @app.route('/camon')
 def camon():
-    subprocess.call("nohup /home/pi/pi_cam.sh &")
+    subprocess.call("sudo nohup /home/pi/pi_cam.sh &")
     context = {'isoff': True,
                'msg': "카메라가 실행되지 않았습니다"}
     if isCameraOn():
         context['isoff'] = False
         context['msg'] = "카메라가 정상실행되었습니다"
-    return render_template('cam_status.html', context)
+    return render_template('cam_status.html', **context)
 
 
 @app.route('/camoff')
 def camoff():
-    result = subprocess.call("kill -9 `ps -ef | egrep 'raspivid|exam' | grep -v grep | awk 'print $2'`")
+    result = subprocess.call("sudo kill -9 `ps -ef | egrep 'raspivid|exam' | grep -v grep | awk 'print $2'`")
     context = {'isoff': False,
                'msg': "카메라가 종료되지 않았습니다"}
     if not result:
         if not isCameraOn():
             context['isoff'] = True
             context['msg'] = "카메라가 정상종료 되었습니다"
-    return render_template('cam_status.html', context)
+    return render_template('cam_status.html', **context)
 
 @app.route('/restart')
 def restart():
@@ -75,4 +75,4 @@ def restart():
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', 4293)
+    app.run('0.0.0.0', 4293, debug=True)
