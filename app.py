@@ -54,7 +54,7 @@ def camon():
 
 @app.route('/camoff')
 def camoff():
-    result = subprocess.call("sudo kill -9 `ps -ef | egrep 'raspivid|exam' | grep -v grep | awk 'print $2'`")
+    result = subprocess.call("sudo kill -9 \`ps -ef | egrep 'raspivid|exam' | grep -v grep | awk 'print $2'\`")
     context = {'isoff': False,
                'msg': "카메라가 종료되지 않았습니다"}
     if not result:
