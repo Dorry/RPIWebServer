@@ -54,7 +54,7 @@ def camon():
 
 @app.route('/camoff')
 def camoff():
-    res_list = subprocess.check_output("ps -ef | egrep 'raspivid|exam' | grep -v grep | awk 'print $2'", shell=True)
+    res_list = subprocess.check_output("ps -ef | egrep 'raspivid|exam' | grep -v grep | awk '{print $2}'", shell=True)
     if len(res_list) > 0:
         result = True
         res_list = str(res_list).splitlines()
